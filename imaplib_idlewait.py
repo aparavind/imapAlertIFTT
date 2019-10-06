@@ -2,6 +2,7 @@ import imaplib
 import pprint
 import imaplib_connect
 import subprocess
+import os
 
 imaplib.Debug = 4
 c = imaplib_connect.open_connection()
@@ -18,7 +19,7 @@ try:
       if line.endswith('EXISTS'):
         x = line.split(' ')[1]
         print "Recieved the " + x
-        data = subprocess.Popen(["/usr/bin/python", "/home/aravind/projects/imap/getImapHeader.py",x], shell=None,stdin=None, stdout=None, stderr=None, close_fds=True)
+        data = subprocess.Popen(["/usr/bin/python", os.path.abspath('getImapHeader.py'),x], shell=None,stdin=None, stdout=None, stderr=None, close_fds=True)
 finally:
     try:
         print ">>> closing..."
